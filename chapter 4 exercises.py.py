@@ -113,16 +113,72 @@ def repeating_squares(): # exercise 16
     import turtle
     #find the number of sqaures to make
     num_sqaures = int(input('How many squares do you want to draw: '))
-    
-    #set random colors
+
+    #variables
+    startX = 100
+    startY = -100
+    seperator = 10
+    screenheight = 900
+    screenwidth = 900
+    distance = 10
+    interger = 10
+    #turtle set up
+    turtle.clearscreen()
+    turtle.penup()
+    turtle.goto(starX, startY)
     turtle.colormode(255)
-    r = random.radint(0, 255)
-    g = random.radint(0, 255)
-    b = random.radint(0, 255)
-    #loop
+    turtle.setup(screenheight, screenwidth)
+    turtle.pendown()
+    turtle.speed(500)
+    #draw sqaures in random colors
     for squares in range(num_sqaures):
-        turtle.hide()
-        turtle.pencolor(r, g, b,)
-        turtle.pendown()
-        turtle.forward(20)
-        turtle.left(20)
+        color1 = random.radint(0,255)
+        color2 = random.radint(0,255)
+        color3 = random.radint(0,255)
+
+        turtle.pencolor(color1, color2, color3)
+
+        turtle.setheading(90)
+        turtle.forward(distance)
+        turtle.left(90)
+        turtle.forward(distance)
+        turtle.left(90)
+        turtle.forward(distance)
+        turtle.left(90)
+        turtle.forward(distance)
+        distance = distance + interger
+def hypnotic_pattern():
+    #hypnotic_pattern accepts no arguemnts
+    #it ask you for how many patterns to draw
+    #draw a pattern using random colors
+    import turtle
+    import random
+    #variables
+    starX = 0
+    starY = 0
+    distance = 3
+    interger = 3
+    t.speed(1000)
+
+    #turtle setup
+    turtle.clearscreen()
+    turtle.penup()
+    turtle.goto(startX, startY)
+    turtle.pendown()
+    turtle.sethead(90)
+    turtle.colormode(255)
+
+    patterns = int(input('Enter the amount of patters: '))
+    while patterns <=0:
+    patterns = int(inputI('Enter a valid number'))
+
+    for pattern in range (patterns):
+        color1 = random.randint(0,255)
+        color2 = random.randint(0,255)
+        color3 = random.randint(0,255)
+        turtle.penolor(color1, color2, color3)
+        
+        for rotation in range(4)
+            distance = distance + (interger * 2)
+            turtle.foward(distance)
+            turtle.left(90)
