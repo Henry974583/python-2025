@@ -106,3 +106,23 @@ def stair_pattern2(): #exercise 15
             print(' ', end='')
         print('@')
         
+def repeating_squares(): # exercise 16
+    #reptating squares() accepts no arguemtns
+    #prompts the user for a amount of sqaures to make and draws them in diffrent collors
+    import random
+    import turtle
+    #find the number of sqaures to make
+    num_sqaures = int(input('How many squares do you want to draw: '))
+    
+    #set random colors
+    turtle.colormode(255)
+    r = random.radint(0, 255)
+    g = random.radint(0, 255)
+    b = random.radint(0, 255)
+    #loop
+    for squares in range(num_sqaures):
+        turtle.hide()
+        turtle.pencolor(r, g, b,)
+        turtle.pendown()
+        turtle.forward(20)
+        turtle.left(20)
