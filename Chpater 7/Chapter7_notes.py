@@ -414,4 +414,14 @@ def random_numbers(): #pogram 7-18
     ROWS = 3
     COLS = 4
     
-    values =[[
+    values =[[0, 0, 0, 0],
+             [0, 0, 0, 0],
+             [0, 0, 0, 0]]
+    
+    #loop
+    for row in range(ROWS):
+        for col in range(COLS):
+            values[row][col] = random.randint(1, 100)
+            
+    #output
+    print(values)
