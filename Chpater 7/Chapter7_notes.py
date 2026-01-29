@@ -92,48 +92,39 @@ def list_index(): #program 7-4
     #and prompt the user to replace on of the items
     #it searches the list for the index of the item
     #and prompts the user with a replacment food
+    foods = ['Burger', 'Pizza', 'Hotdog']
     
-    #vairables and list
-    index = 0
-    food_list = ['Burger', 'Pizza', 'Hotdog']
+    search = str(input('Please enter a item to replace: '))
     
-    #prompt user what to search for
-    search = str(input('Enter the item to search for: '))
-    
-    #if item is found
-    if search in food_list:
-        #remove the item
-        food_list.remove(search)
-        #item found now input new item
-        new_item = str(input('item found enter new item: '))
+    #try to find food
+    try:
+        if foods.index(search) >= 0:
+            index = foods.index(search)
+            new_food = input('Item found please insert new item: ')
+            foods[index] = new_food
         
-        #insert new item
-        food_list.insert(0, new_item)
-        #new list needs to be printed
-        print('Here is the list: ',food_list)
+    except:
+        print()
+        print(search, 'was not founnd')
         
-    #if the item is not found
-    if search not in food_list:
-        print('Item not found')
-        print('Here is the list: ', food_list)
-        
+    print('\nHere is the list:', foods)
 def list_insert(): #program 7-5
-    #list insert accepts no arguments
-    #it prints hte original list of three names
-    #it inserts a name in a list of names
-    #at a specific index and prints the new list
-    
+#list insert accepts no arguments
+#it prints hte original list of three names
+#it inserts a name in a list of names
+#at a specific index and prints the new list
+
     #list
     names = ['Bruce', 'Steve', 'Tony']
-    
+
     #print current list
     print(names)
-    
+
     #insert name
     names.insert(2, 'Sam')
     #print new list
     print(names)
-    
+
     
 def list_remove(): #program 7-6
     #list remove accepts no arguments

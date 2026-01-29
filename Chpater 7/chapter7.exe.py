@@ -99,121 +99,132 @@ def rainfall(): #exercise 3
     #print the total and average
     print('Total rain for the year:', total, 'inches')
     print('Average rain per month:', average, 'inches')
+def charge_accts():
+    again = "y"
+    bad = True
     
-def charge_accts(): #exercise 5
-    #accepts no argument
-    #asks for a number
-    #and checks if it in a list
-    #it also checks that they are valid numbers
-    #open file and variables
-    account = []
-    go = 'y'
-    infile = open('charge_accounts.txt', 'r')
-    
-    
-    if go == 'y':
-        account_number = input('type a account number ')
+    while again == "y":
+        # while they want to check another account number
         
-    while account_number.isdigit() == False:
-        account_number = input('Enter and account number(numerics only) ')
+        # ask for an account number
+        account_number = input("Enter an account number: ")
         
-    on_list == isValid(account_number)
-    
-    if on_list == 'valid':
-        print('the account number is valid')
-    else:
-        print('The account is invalid')
+        # check if it is a number
+        while account_number.isdigit() == False:
+            account_number = input("Enter an account number (numeric only): ")
         
-    go = input('Go again? ')
-    
-    if go == 'y':
-        charge_accts()
+        # check if its on the list
+        on_list = isValid(account_number)
+        
+        if on_list == "valid":
+            print("\nThe account number is valid.\n")
+        else:
+            print("\nThe account is invalid.\n")
+        
+        # ask if they want to check another
+        again = input("Check another account number? (y/n) : ")
     
 def isValid(account_number):
-    for acc in infile:
-        acc = r.strip('\n')
+    # is valid recieves an argument for the acount number
+    # it checks the account file to see if a number
+    # is on the list
+    account_file = open("charge_accounts.txt", "r")
+    accounts = []
+    go = "y"
+    
+    for acc in account_file:
+        acc = acc.rstrip("\n")
         accounts.append(acc)
         
-    infile.close()
-    
-    if account_number not in accounts:
-        return on_list == 'invalid'
-    else:
-        return on_list == 'valid'
-    
-def drivers_exam(): #exercise 4
-    #no arguments
-    #it reads from a file
-    again = 'y'
-    total = 20
-    while again.lower() == 'y':
-        #promt the user
-        test_file = input('Please enter the name of the file ')
+    account_file.close()
         
-        if not os.path.exist(test_file):
-            print(test_file, ' not found.')
-        else:
-            #start answer key
-            answer_key = open('driver_test_key.txt', 'r')
+    # check if the account number is on the list
+    if account_number not in accounts:
+        return "invalid"
+    else:
+        return "valid"
+def drivers_exam():
+    # drivers exam recieves no arguments
+    # it reads a test key from a file
+    another = 'y'
+    TOTAL_QUESTIONS = 20
+    try:
+        while another.lower() == 'y':
+            # prompt the user for the filename to read
+            test_file = input("\nPlease enter the name of the file to read: ")
             
-            #open test file
-            test_answers = open(test_file, 'r')
-            
-        #lists
-            answers = []
-            user_answers = []
-            
-            #create the list
-            for line in answer_key:
-                line = line.rstip('\n')
-                user_answers.append(line)
+            if not os.path.exists(test_file):
+                print(f"{test_file} not found.")
+            else:
+                # open the answerkey
+                answer_key = open("driver_test_key.txt", "r")
+                # open the test file
+                test_answers = open(test_file, "r")
                 
-            for line in test_answers:
-                lin = line.rstrip('\n')
-                user_answers.append(line)
-                
-            #wrong index
-                
-            wrong_index = []
-            counter = -1
-            correct = 0
-            
-            for ans in answer:
-                counter += 1
-                if ans == user_answers[counter]:
-                    correct +=1
-                else:
-                    wrong_index.append(counter + 1)
+                # intialize answers key list and test_answers list
+                answers = []
+                user_answers = []
+                # create the list with all the answers
+                for line in answer_key:
+                    line = line.rstrip("\n")
+                    answers.append(line)
                     
-            print('Test complete')
-            
-            print('your answerd', correct, 'questions correctly out of total', total)
-            
-            missed = total - correct
-            
-            print('You missed', missed, 'the minium you could miss to pass was 5')
-            
-            if missed > 5:
-                print('You did not pass')
-            else:
-                print('You passed')
+                for line in test_answers:
+                    line = line.rstrip("\n")
+                    user_answers.append(line)
                 
-            if missed == 0:
-                print()
-            else:
-                print('Here ar the questions you missed', wrong_index)
+                # create a list of wrong indexes and begin index
+                wrong_indexes = []
+                counter = -1
+                correct = 0
                 
-
+                # check if each answer is correct
+                for ans in answers:
+                    counter += 1
+                    if ans == user_answers[counter]:
+                        correct += 1
+                    else:
+                        # add wrong question number to list
+                        wrong_indexes.append(counter + 1)
+                
+                # output message
+                print("\nTest grading complete.")
+                
+                # output score and missed questsions
+                print(f"\nYou answered {correct} questions correctly out of {TOTAL_QUESTIONS}")
+                
+                missed_questions = TOTAL_QUESTIONS - correct
+                
+                print(f"You missed {missed_questions}. The minimum you could miss to pass was 5.")
+                
+                if missed_questions > 5:
+                    print("You did not pass, study and try again.\n")
+                else:
+                    print("\nCongratulations, you passed the exam!")
+                    
+                if missed_questions == 0:
+                    print()
+                else:
+                    print(f"Here are the questions you missed:\n{wrong_indexes}\n")
+                
+                    another = input("Check another test? (y/n) : ")
+                    
+                    
+                    answer_key.close()
+                    test_answers.close()
+    except Exception as err:
+        print(err)
 def tic_tac_toe():
     #accepts no arguments
     #it calls everything to play tic tac toe
-     # create the list for the board
+    #create the list for the board
+    #create the list for the board
     board = [["-", "-", "-"],
              ["-", "-", "-"],
              ["-", "-", "-"]]
     x_or_o = 0
     not_over = True
-    #loop to play
+    
     while not_over == True:
         x_or_o += 1
         index1 = random.randint(0,2)
@@ -221,7 +232,7 @@ def tic_tac_toe():
         while board[index1][index2] != '-':
             index1 = random.randint(0,2)
             index2 = random.randint(0,2)
-        #assign the place in the list a x or o
+        
         if x_or_o % 2 == 0:
             letter = "X"
         else:
@@ -230,7 +241,7 @@ def tic_tac_toe():
         board[index1][index2] = letter
         
         not_over = game_over(board)
-    #display winner or not
+
     winner = winner_check(board)
     if winner != "Tie":
         print(f"Winner is {winner}")
@@ -244,6 +255,8 @@ def game_over(board):
     #without a winner
     #if so it retruns true, false otherwise
     #left adn right
+    
+    #tons of if statment so if they lost
     if board[0][0] == board[0][1] and board[0][1] == board[0][2] and board[0][0] != '-':
         return False
     elif board[1][0] == board[1][1] and board[1][1] == board[1][2] and board[1][0] != '-':
@@ -266,12 +279,14 @@ def game_over(board):
         return True
            
 def winner_check(board):
-    # game_over recieves an argument for the board
-    # and checks if all plays have been made
-    # without a winner
-    # if so it returns true, false otherwise
+    #game_over recieves an argument for the board
+    #and checks if all plays have been made
+    #without a winner
+    #if so it returns true, false otherwise
     tie = "Tie"
         # left and right
+        
+    #tons of if statements to see if they won
     if board[0][0] == board[0][1] and board[0][1] == board[0][2] and board[0][0] != '-':
         return board[0][0]
     elif board[1][0] == board[1][1] and board[1][1] == board[1][2] and board[1][0] != '-':
@@ -323,9 +338,9 @@ def white_elephant(): #exercise 5
         recievers.remove(reciever)
     
 def magic_8_ball():
-# magic 8 ball asks people for a qquestion
-# it reads from a file and adds the responses to a list
-# it prints the answer
+#magic 8 ball asks people for a qquestion
+#it reads from a file and adds the responses to a list
+#it prints the answer
 
     response = open("8_ball_responses.txt", "r")
     responses = []
@@ -345,3 +360,32 @@ def magic_8_ball():
 
     keep_going = 'y'
    
+   
+def menu():
+    #calls other functions arcording to thing
+    
+    #print header
+    print('1: lottery number')
+    print('2: rainfall')
+    print('3: charge account')
+    print('4: drivers license')
+    print('5: tic tac toe')
+    print('6: white elephant')
+    print('7: magic 8 ball')
+    #ask for input
+    choice = int(input('What program? '))
+    
+    if choice == 1:
+        lottery()
+    elif choice == 2:
+        rainfall()
+    elif choice == 3:
+        charge_accts()
+    elif choice == 4:
+        drivers_exam()
+    elif choice == 5:
+        tic_tac_toe()
+    elif choice == 6:
+        white_elephant()
+    elif choice == 7:
+        magic_8_ball()
