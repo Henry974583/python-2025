@@ -67,27 +67,112 @@ def sum_of_digits():
     #validate
     valid = string.isalnum()
     
-    if valid
+    #if not valid
+    while string.isdigit() != True:
+        string = str(input('Enter a string of digit numbers only: '))
+        
+    total = 0
+    
+    for num in string:
+        total += int(num)
+        
+    print('The total is', total)
 
 def date_converter():
     #accepts no arguments
     #takes input of a date
     #validates all inputs are correct
     #and outputs the date
-    pass
+    
+    again = True
+    #confirm it follows all the formatting rules
+    while again == True:
+        date = input("Enter a date in the format mm/dd/yyyy: ")
+        date_list = date.split("/")
+        if len(date_list) == 3:
+            if date_list[0].isdigit() == True and date_list[1].isdigit() == True and date_list[2].isdigit() == True:
+                if int(date_list[0]) < 13 and int(date_list[1]) < 32:
+                    if len(date_list[0]) == 2 and len(date_list[1]) == 2 and len(date_list[2]) == 4:
+                        #set again boolean to false
+                        again = False
+                    else:
+                        print("Make sure you follow the format.")
+                else:
+                    print("Make sure you follow the format.")
+            else:
+                print("Make sure you follow the format.")
+        else:
+            print("Make sure you follow the format.")
+    
+    #create the list of month
+            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septemper', 'October', 'November', 'December']
+    
+    #preset variables
+    month_number = int(date_list[0])
+    month = ''
+    
+    #find the month
+    for month in MONTHS:
+        month_index_number = MONTHS.index(month)
+        if month_index_number + 1 == month_number:
+            # save the real month
+            real_month = month
+    
+    #print
+    print(f"The date is: {real_month} {date_list[1]}, {date_list[2]}")
+    
     
 def morse_code_translator():
     #accepts no arguemts
     #takes input from user
     #and converts it to morse code
     #it also validates for only alphabetical numbers
-    pass
+    
+    #assign list and variables
+    alaphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    MORSE_ALPHABET = ['•-', '-•••', '-•-•', '-••', '•', '••-•', '--•', '••••', '••', '•---', '-•-', '•-••', '--','-•', '---', '•--•', '--•-', '•-•', '•••', '-', '••-', '•••-', '•--', '-••-', '-•--', '--••','•----', '••---', '•••---', '••••-', '•••••', '-••••', '--•••', '---••', '----•', '-----']
+    valid = False
+    bad = 0
+    final_string = ''
+    
+    #loop for validation
+    while valid == False:
+        string = input('Enter a message to encode to morse cods: ')
+        mylist = string.split(' ')
+        
+    
+    #check that it is valid
+        for word in string:
+            if word.isalnum() == False:
+                bad += 1
+                
+        if bad != 0:
+            valid = False
+            bad = 0
+            
+        else:
+            valid = True
+            
+    #check each indvidual letter
+    for letter in string:
+        if letter in alaphabet:
+            letter_index = alaphabet.index(letter)
+            morse_letter = MORSE_ALPHABET[letter_index]
+            final_string += morse_letter + ' '
+        else:
+            final_string += ' '
+        
+    print('\n' + final_string)
+    
+
 
 def phone_converter():
     #accepts no arguments
     #takes input from user that is only in telephone format
     #it then coverts the telephone number if it has letters in it
-    pass
+    
+    #variables and list
+    
 
 def avg_num_words():
     #accetps no arguments
