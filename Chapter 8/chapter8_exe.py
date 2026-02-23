@@ -1,3 +1,4 @@
+import io
 def menu():
     #accepts no arguments
     #it ask user for input on what program
@@ -105,7 +106,7 @@ def date_converter():
             print("Make sure you follow the format.")
     
     #create the list of month
-            months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septemper', 'October', 'November', 'December']
+    MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septemper', 'October', 'November', 'December']
     
     #preset variables
     month_number = int(date_list[0])
@@ -130,7 +131,7 @@ def morse_code_translator():
     
     #assign list and variables
     alaphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9']
-    MORSE_ALPHABET = ['•-', '-•••', '-•-•', '-••', '•', '••-•', '--•', '••••', '••', '•---', '-•-', '•-••', '--','-•', '---', '•--•', '--•-', '•-•', '•••', '-', '••-', '•••-', '•--', '-••-', '-•--', '--••','•----', '••---', '•••---', '••••-', '•••••', '-••••', '--•••', '---••', '----•', '-----']
+    MORSE_ALAPHABET = ['•-', '-•••', '-•-•', '-••', '•', '••-•', '--•', '••••', '••', '•---', '-•-', '•-••', '--','-•', '---', '•--•', '--•-', '•-•', '•••', '-', '••-', '•••-', '•--', '-••-', '-•--', '--••','•----', '••---', '•••---', '••••-', '•••••', '-••••', '--•••', '---••', '----•', '-----']
     valid = False
     bad = 0
     final_string = ''
@@ -157,7 +158,7 @@ def morse_code_translator():
     for letter in string:
         if letter in alaphabet:
             letter_index = alaphabet.index(letter)
-            morse_letter = MORSE_ALPHABET[letter_index]
+            morse_letter = MORSE_ALAPHABET[letter_index]
             final_string += morse_letter + ' '
         else:
             final_string += ' '
@@ -172,45 +173,274 @@ def phone_converter():
     #it then coverts the telephone number if it has letters in it
     
     #variables and list
-    
+    again = True
+    final_string = ""
+    NUMBER_ALPHABET = ["2", "2", "2", "3", "3", "3", "4", "4", "4", "5", "5", "5", "6", "6", "6", "7", "7", "7", "8", "8", "8", "9", "9", "9", "9"]
+    ALPHABET = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
+   #loop for if they make a mistake
+    while again == True:
+        #ask for input
+        number = input("Enter a telephone number in the form of XXX-XXX-XXXX: ")
+        #split to a list
+        number_list = number.split("-")
+        #verify it follows every rule
+        if len(number_list) == 3:
+            if len(number_list[0]) == 3 and len(number_list[1]) == 3 and len(number_list[2]) == 4:
+                for row in number_list:
+                    #get each letter
+                    for letter in row:
+                        if letter.lower() in ALPHABET:
+                            #translate them
+                            letter = letter.lower()
+                            letters_index = ALPHABET.index(letter)
+                            number = NUMBER_ALPHABET[letters_index]
+                            #add them to final string
+                            final_string += number
+                        else:
+                            final_string += letter
+                    if row != number_list[2]:
+                        #add a spacer
+                        final_string += "-"
+                #print final number and set again to false
+                print(f"Here is your converted telephone number: {final_string}")
+                again = False
 def avg_num_words():
     #accetps no arguments
     #it open file text.txt
     #and checks how many words are in it
     #how many sentences
     #and the average number of words per sentence
-    pass
-
+    
+    #variables
+    outfile = open('text.txt', 'r')
+    sentences = 0
+    words = 0
+    
+    #count for each line
+    for line in outfile:
+        #create the line
+        line = line.rstrip('\n')
+        #split it
+        line_list = line.split(' ')
+        words += len(line_list)
+        sentences += 1
+        
+    average = words / sentences
+    #print
+    print(f'The file text.txt has {words} words')
+    print(f'There are {sentences} total sentences.')
+    print(f'The average number of words per sentence is {average}')
 def igpay_atinlay():
     #accepts no arguements
     #it ask the user for a sentence in english
     #and converts it to pig latin
-    pass
-
+    
+    #vairable
+    final_string = ''
+    #input
+    string = input('Enter a message to convert to pig latin: ')
+    my_list = string.split(' ')
+    
+    for word in my_list:
+        #reset the period and check for one
+        period = False
+        if '.' in word:
+            #replace period with nothing
+            word = word.replace('.', '')
+            period = True
+            
+        #get the first letter
+        first_letter = word[0]
+        
+        #add to the string
+        word += first_letter
+        
+        #remove letter at the start
+        word = word[1:]
+        
+        #add the letter ay to the begining of the word
+        word += 'AY'
+        
+        if period == True:
+            word += '.'
+            
+        #add to the final string
+        final_string += word + ' '
+        
+    print(final_string.upper())
+    
 def pb_main():
     #accepts no arguments
     #runs the powerball
     #and calls other functions accordolying
-    pass
+    
+    #call frequency
+    #Get the frequency and pb_frequency lists
+    frequency, pb_freq = pb_frequency()
+    
+    #get the most common numbers
+    most_common_freq, most_common_pb = pb_most_common(frequency, pb_freq)
+    minimum_freq, minimum_pb_freq = pb_least_common(frequency, pb_freq)
+    
+    #sort each list
+    most_common_freq.sort()
+    most_common_pb.sort()
+    minimum_freq.sort()
+    minimum_pb_freq.sort()
+    
+    #print out the numbers
+    print("The most common lottery numbers are:")
+    for num in most_common_freq:
+        print(num)
+    print()
+    
+    print("The most common powerball numbers are:")
+    for num in most_common_pb:
+        print(num)
+    print()
+    
+    print("The least common lottery numbers are:")
+    for num in minimum_freq:
+        print(num)
+    print()
+    
+    print("The least common powerball numbers are:")
+    for num in minimum_pb_freq:
+        print(num)
 
-def pb_most_common():
+def pb_most_common(frequency, pb_freq):
     #accepts no arguments
     #it determines the 10 most common numbers
     #and orders them by frequency
-    pass
+    
+    #initalize variables
+    maximum = 0
+    maximums = []
+    pb_maximums = []
+    frequency_copy = []
+    pb_freq_copy = []
+    
+    #copy frequencies
+    for num in frequency:
+        frequency_copy.append(num)
+    
+    for num in pb_freq:
+        pb_freq_copy.append(num)
+    
+    #get the maxium list
+    for num in range(0, 10):
+        for num in frequency_copy:
+            if num > maximum:
+                maximum = num
+            if maximum == 0:
+                break
+        maximum_index = frequency_copy.index(maximum)
+        frequency_copy[maximum_index] = 0
+        
+        maximums.append(maximum_index + 1)
+        
+        maximum = 0
+    
+    #get powerball maximum list
+    for num in range(0,10):
+        for num in pb_freq_copy:
+            if num > maximum:
+                maximum = num
+            if maximum == 0:
+                break
+        maximum_index = pb_freq_copy.index(maximum)
+        pb_freq_copy[maximum_index] = 0
+        
+        pb_maximums.append(maximum_index + 1)
+        
+        maximum = 0
+    
+    #return them
+    return maximums, pb_maximums
 
-def pb_least_common():
+def pb_least_common(frequency, pb_freq):
     #accepts no arguments
     #determines the 10 least common numbers
     #and orders them by frequency
-    pass
+    
+    #variables
+    minimum = 100
+    minimums = []
+    pb_minimums = []
+    frequency_copy = []
+    pb_freq_copy = []
+    
+    #copy frequencies
+    for num in frequency:
+        frequency_copy.append(num)
+    for num in pb_freq:
+        pb_freq_copy.append(num)
+    
+    #get minimums
+    for num in range(0,10):
+        for num in frequency_copy:
+            if num < minimum:
+                minimum = num    
+        index = frequency_copy.index(minimum)
+        frequency_copy[index] = 100
+        
+        minimums.append(index + 1)
+        minimum = 100
+    
+    #get minimum powerballs
+    for num in range(0,10):
+        for num in pb_freq_copy:
+            if num < minimum:
+                minimum = num        
+        index = pb_freq_copy.index(minimum)
+        pb_freq_copy[index] = 100
+        
+        pb_minimums.append(index + 1)
+        minimum = 100
+    
+    #return
+    return minimums, pb_minimums
 
 def pb_frequency():
     #accepts no arguemts
     #determines how much each numbers 1-69 was drawn
     #and each powerball was drawn
-    pass
+    NUMBERS = []
+    frequency = []
+    PB_NUMBERS = []
+    pb_freq = []
+    
+    #generate the lists
+    for num in range(0, 69):
+        NUMBERS.append(num)
+        frequency.append(0)
+    
+    for num in range(0, 25 + 1):
+        PB_NUMBERS.append(num)
+        pb_freq.append(0)
+    
+    
+    #open the file
+    outfile = open("pbnumbers.txt", "r")
+    
+    #make each lien a list
+    for line in outfile:
+        line_list = line.split(" ")
+        line_list[5] = line_list[5].rstrip("\n")
+        
+        
+        for number in range(0,4+1):
+            num = int(line_list[number])
+            num_index = NUMBERS.index(num - 1)
+            frequency[int(num_index)] += 1
+        #add pb frequency to pb list
+        num = int(line_list[5])
+        num_index = NUMBERS.index(num -1)
+        pb_freq[int(num_index)] += 1
+    
+    #return the frequency lists
+    return frequency, pb_freq
 
 def gas_price():
     #accepts no arguments
@@ -220,12 +450,49 @@ def gas_price():
     #highest and lowest price
     #list of prices from lowest to highest
     #and list of prices highest to lowest
-    pass
-
-def list_gas_price():
-    #accepts no arguments
-    #it finds 3 things
-    #the average
-    #and average price per year
-    #and returns them
-    pass
+    
+    gas = open("GasPrices.txt", "r")
+    
+    # preset counter and total
+    total = 0.0
+    counter = 0
+    # split up the line, making it into lists
+    line = gas.readline()
+    line_list = line.split("-")
+    line_list[2] = line_list[2].split(":")
+    line_list[2][1] = line_list[2][1].rstrip("\n")
+    
+    # set price and date variables
+    price = line_list[2][1]
+    date = line_list[2][0]
+    
+    # add the price to the total, and add onto counter, setting old date for loop
+    total += float(price)
+    counter += 1
+    old_date = date
+    
+    # read each line in the file and split it
+    for line in gas:
+        line_list = line.split("-")
+        line_list[2] = line_list[2].split(":")
+        line_list[2][1] = line_list[2][1].rstrip("\n")
+        
+        # set price and date
+        price = line_list[2][1]
+        date = line_list[2][0]
+        
+        # check if the date matches
+        if date == old_date:
+            total += float(price)
+            counter += 1
+        else:
+            # get the average and reset the old date and counter.
+            average = total / counter
+            print(f"The average price in {old_date} was ${average:.2f}.")
+            
+            total = float(price)
+            counter = 1
+            old_date = date
+    # print final prices
+    print(f"The average price in {old_date} was ${average:.2f}.")
+    gas.close()
