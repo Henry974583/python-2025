@@ -37,7 +37,7 @@ def menu():
             blackjack()
             
         go = str(input('Run another program (y/n)? '))
-        
+        print()
     if go == 'n':
         print('goodbye')
         
@@ -69,8 +69,32 @@ def decryption():
     #it reads a file
     #and decrypts it
     #print it
-    pass
-
+    
+    #key and open files
+    key = {'a': 'y', 'b': 's', 'c': 'K', 'd': '{', 'e': '1', 'f': 'Q', 'g': 'q', 'h': '*', 'i': 'L', 'j': ')', 'k': '#', 'l': '[', 'm': '8', 'n': 'D', 'o': ',', 'p': 'f', 'q': '^', 'r': '7', 's': '`', 't': 'x', 'u': '_', 'v': '0', 'w': 'M', 'x': 'u', 'y': '.', 'z': 'T', 'A': 'Y', 'B': '>', 'C': '$', 'D': 'j', 'E': 'F', 'F': 'O', 'G': 'I', 'H': 'A', 'I': 'l', 'J': 'P', 'K': 'p', 'L': 'n', 'M': 'c', 'N': 'X', 'O': '!', 'P': 'C', 'Q': '5', 'R': 'k', 'S': 'S', 'T': 'E', 'U': 'm', 'V': 't', 'W': '3', 'X': 'U', 'Y': '}', 'Z': 'H', '!': 'g', '#': '-', '$': 'e', '%': '%', '&': 'o', '(': ';', ')': '~', '*': 'd', '+': 'N', ',': '&', '-': 'z', '.': '(', '/': 'W', ':': 'v', ';': 'h', '<': 'i', '=': '2', '>': 'V', '?': 'R', '@': '@', '[': 'a', ']': 'r', '^': '4', '_': 'Z', '`': '9', '{': '=', '|': ']', '}': '|', '~': 'G', '0': 'J', '1': 'w', '2': '6', '3': '/', '4': 'B', '5': ':', '6': '+', '7': '<', '8': 'b', '9': '?', " ": " ", "\n" : "\n"}
+    decoded_file = open('decoded_file.txt', 'w')
+    encoded_file = open('encoded_file.txt', 'r')
+    reversed_key = {}
+    
+    #reverse the key
+    for item in key:
+        temp_item = key[item]
+        
+        reversed_key[temp_item] = item
+        
+    #decode the file
+    for line in encoded_file:
+        decoded_line = ''
+        
+        for letter in line:
+            decoded_line += reversed_key[letter]
+            
+        decoded_file.write(decoded_line)
+        
+    #close the files
+    decoded_file.close()
+    encoded_file.close()
+    print('The decrypted encoded_file.txt to decoded_file.txt')
 def unique_words():
     #accepts arguments
     #it uses text file text.txt
