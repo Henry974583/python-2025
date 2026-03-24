@@ -99,15 +99,57 @@ def unique_words():
     #accepts arguments
     #it uses text file text.txt
     #it display a list of all unique words in the file
-    pass
+    
+    #open the file
+    file = open('text.txt', 'r')
+    #begin the set
+    unique = set([])
+    
+    
+    #begin the loop
+    for line in file:
+        #this will iterate over the word not the line
+        for word in line.split(' '):
+            while word not in unique:
+                unique.add(word)
+                
+    #itterate over the set to display unique words nicely
+    print('The following words are unique in this text file')
+    for unique_word in unique:
+        print(unique_word)
+    
 
 def world_series_winners():
     #it accepts no arguments
     #it open file WorldSeriesWinners.txt
     #it ask the user for a team name to search for
     #and prints how many times they won that year
-    pass
-
+    
+    #open the file
+    file = open('WorldSeries.txt', 'r')
+    
+    #input to ask for team and what year to search
+    search = str(input('Enter a team to search for: '))
+    year = int(input('Enter the year to search for: '))
+    #if statement to make sure the year is valid
+    if year == 1904 or year == 1994:
+             print('no world series in year', year)
+             print('Try again')
+    else:
+        #counter to make the program know what year it was on
+        key = {}
+        final_team = ''
+        #begin for loop
+        for line in file:
+            
+            #split the name
+            names = line.split(' ')
+            
+        
+            for team in names:
+                
+            
+            
 def blackjack():
     #it accepts no arguments
     #and calls other functions to run a game of black jack
