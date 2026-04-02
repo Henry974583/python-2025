@@ -19,12 +19,13 @@ def main(): #program  10-8
     
     #paycheck
     
-    paycheck = float(input('Enter the amount of your paycheck to deposit'))
+    paycheck = float(input('Enter the amount of your paycheck to deposit: '))
     bank_account.deposit(paycheck)
+    
     #withdraws
     print()
     #print(
-    print(bank_account.get_balance())
+    print(bank_account)
     
     #withdraw amount
     withdraw_ammount = float(input('How much would you like to withdraw: '))
@@ -33,7 +34,7 @@ def main(): #program  10-8
     print('Withdraw succesful')
     
     #new balance
-    print(bank_account.get_balance())
+    print(bank_account)
     
     
 
