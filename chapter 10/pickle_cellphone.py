@@ -33,9 +33,9 @@ def main():
         info.set_retail_price(price)
         
         #pickle them
-        outfile.write(info.get_manufact())
-        outfile.write(info.get_model())
-        outfile.write(info.get_retial_price())
+        outfile.dump(info.get_manufact())
+        outfile.dump.(get_model())
+        outfile.dump(info.get_retial_price())
         
         
         
